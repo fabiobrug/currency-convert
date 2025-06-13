@@ -6,6 +6,8 @@ const shuffle = document.querySelector(".shuffle")
 
 let gambling = false;
 
+let shuffleOrder = 0;
+
 console.log(gambling)
 
 button.addEventListener('click', () =>{
@@ -20,10 +22,11 @@ function playCoinAudio(){
     coinSound.play();
 }
 
-let btcTotal = 107859;
+let btcTotal = 0;
 let btcQnt = 0;
 
 function addCash(){
+    btcTotal = btcTotal + 107859;
     btcQnt++;
     const formatted = btcTotal.toLocaleString("pt-BR", {
         minimumFractionDigits: 2,
@@ -31,7 +34,6 @@ function addCash(){
     })
     balance.innerHTML = `Balance: $${formatted}`
     btc.innerHTML = `BTC: ${btcQnt}`
-    btcTotal = btcTotal + 107859;
 }
 
 const hellSound = new Audio("assets/sounds/heavy-dark-sound-7545.mp3");
@@ -50,9 +52,11 @@ function stopHellAudio() {
 function gmON(){
      document.body.classList.add("gamblingMode")
      button.classList.add("startButtonGM")
-     button.innerHTML = "Will you risk it all?"
+     button.innerHTML = "Welcome to hell"
      shuffle.classList.add("shuffleGM")
      addYes()
+     addNo()
+     addQuestion()
      playHellAudio()
 }
 
@@ -65,24 +69,98 @@ function gmOFF(){
      coin.classList.add('animate');
      button.innerHTML = "BTC <i class='fab fa-bitcoin'></i>"
      playCoinAudio();
-     addCash()
      stopHellAudio();
 }
 
 function gamblingMode() {
     const luck = Math.random();
 
-    if(luck < 0.5){
+    if(luck < 0.5 && btcQnt != 0){
         gambling = true;
         gmON()
     }else {
         gmOFF()
+        addCash()
   }
 }
+
+const laughAudio = new Audio('assets/sounds/joker-laugh-2-98829.mp3')
+const buyAudio = new Audio('assets/sounds/buy_1.mp3')
 
 function addYes(){
     const yesBtn = document.createElement('button')
     yesBtn.innerHTML = "Yes"
     yesBtn.classList.add("yes")
     document.body.appendChild(yesBtn);
+    yesBtn.addEventListener('mousemove', () => {
+        laughAudio.play()
+    })
+    yesBtn.addEventListener('click', () =>{
+    
+     const luck = Math.random();
+
+    if(luck < 0.5 && btcQnt != 0){
+       btcTotal = 0;
+    }else {
+        btcTotal = btcTotal * 2;
+  }
+
+  const formatted = btcTotal.toLocaleString("pt-BR", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    })
+    balance.innerHTML = `Balance: $${formatted}`
+    btc.innerHTML = `BTC: ${btcQnt}`
+
+    buyAudio.play()
+    gmOFF()
+    removeGamblingUI()
+    })
 }
+
+function addNo(){
+    const NoBtn = document.createElement('button')
+    NoBtn.innerHTML = "No"
+    NoBtn.classList.add("no")
+    document.body.appendChild(NoBtn);
+
+    NoBtn.addEventListener('click', () => {
+     gmOFF()
+    removeGamblingUI()
+    })
+}
+
+function addQuestion(){
+    const question = document.createElement('h4')
+    question.innerHTML = "Press YES to double or lose it all"
+    question.classList.add("question")
+    document.body.appendChild(question)
+}
+
+function removeYes() {
+    const yesBtn = document.querySelector('.yes');
+    if (yesBtn) yesBtn.remove();
+}
+
+function removeNo() {
+    const noBtn = document.querySelector('.no');
+    if (noBtn) noBtn.remove();
+}
+
+function removeQuestion() {
+    const question = document.querySelector('.question');
+    if (question) question.remove();
+}
+
+function removeGamblingUI() {
+    removeYes();
+    removeNo();
+    removeQuestion();
+    gambling = false;
+}
+
+shuffle.addEventListener('click', () => {
+    shuffleOrder = 1;
+    button.innerHTML = "ETH"
+   button.classList.add("ethButton")
+})
