@@ -312,3 +312,71 @@ background: linear-gradient(135deg, #1a1f23, #1E90FF);
   transform: scale(1.05);
 }
 
+@media (max-width: 768px) {
+
+  .balance,
+  .coins {
+    position: absolute;
+    bottom: 16vw; /* espaço acima do botão principal */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 5vw;
+    margin: 0;
+    text-align: center;
+  }
+
+  .coins {
+    bottom: 10vw; /* um pouco acima do balance */
+  }
+  
+  .startButton,
+  .ethButton,
+  .solButton,
+  .xrpButton,
+  .startButtonGM {
+    height: 14vw;
+    width: 80vw;
+    font-size: 6vw;
+    border-radius: 100vw;
+  }
+
+  .coin {
+    font-size: 6vw;
+    top: 42%;
+    left: 50%;
+  }
+
+  .shuffle {
+    font-size: 6vw;
+    margin-top: 5vw;
+  }
+
+  .yes,
+  .no {
+    height: 20vw;
+    width: 20vw;
+    font-size: 6vw;
+  }
+
+  .yes {
+    top: 8%;
+    left: 8%;
+  }
+
+  .no {
+    top: 8%;
+    right: 8%;
+  }
+
+  .question {
+    font-size: 4.5vw;
+    top: 5%;
+  }
+
+  #grid {
+    flex-direction: column;
+    gap: 4vw;
+  }
+}
+
+

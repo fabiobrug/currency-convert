@@ -148,7 +148,6 @@ function addYes(){
     yesBtn.classList.add("yes")
     document.body.appendChild(yesBtn);
     yesBtn.addEventListener('mousemove', () => {
-        laughAudio.play()
     })
     yesBtn.addEventListener('click', () =>{
     
@@ -156,8 +155,10 @@ function addYes(){
 
     if(luck < 0.5 && btcQnt != 0){
        btcTotal = 0;
+       laughAudio.play()
     }else {
         btcTotal = btcTotal * 2;
+        buyAudio.play()
   }
 
   const formatted = btcTotal.toLocaleString("pt-BR", {
@@ -173,7 +174,7 @@ function addYes(){
     }
 
 
-    buyAudio.play()
+    
     gmOFF()
     removeGamblingUI()
     })
