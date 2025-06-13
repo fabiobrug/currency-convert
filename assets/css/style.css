@@ -24,16 +24,17 @@ body{
 }
 
 .startButton {
-  position: relative;
-  height: 8vw;     /* 10vw */
-  width: 45vw;      /* 50vw */
+   position: relative;
+  height: 8vw;
+  width: 45vw;
   border-radius: 50vw;
-  background-color: #F7931A;
-  transition: transform 0.6s, background-color 0.4s ease;
-  cursor: pointer;
+  background: linear-gradient(135deg, #F7931A, #FFB347);
   color: #1c2b36;
-  font-size: 4vw;    /* 5vw */
+  font-size: 4vw;
   border: none;
+  cursor: pointer;
+  box-shadow: 0 0 0.5vw rgba(255, 165, 0, 0.3);
+  transition: all 0.4s ease;
 }
 
 .ethButton {
@@ -41,16 +42,20 @@ body{
   height: 8vw;     /* 10vw */
   width: 45vw;      /* 50vw */
   border-radius: 50vw;
-  background-color: #62688F;
-  transition: transform 0.6s, background-color 0.4s ease;
+  background: linear-gradient(135deg, #3C3C3D, #62688F);
+  transition: all 0.4s ease;
   cursor: pointer;
-  color: #3C3C3D;
-  font-size: 4vw;    /* 5vw */
+  color: #fff;
+  font-size: 4vw; 
+ box-shadow: 0 0 0.5vw rgba(171, 196, 255, 0.3);  
   border: none;
+
 }
 
 .ethButton:hover {
-  background-color: #ABC4FF;
+  background: linear-gradient(135deg, #4A4A6A, #ABC4FF);
+  box-shadow: 0 0 1.2vw rgba(171, 196, 255, 0.8);
+  transform: scale(1.05);
 }
 
 .ethButton:active {
@@ -73,7 +78,9 @@ i {
 }
 
 .startButton:hover {
-  background-color: #e0800a;
+ background: linear-gradient(135deg, #FFA500, #FFE4B5);
+  box-shadow: 0 0 1.2vw rgba(255, 140, 0, 0.8);
+  transform: scale(1.05);
 }
 
 .startButton:active {
@@ -90,7 +97,7 @@ i {
   align-items: center;
   justify-content: center;
   font-size: 4vw;
-  color: #FFD700;
+  color: #1c2b36;
   z-index: -1;
 }
 
@@ -263,6 +270,45 @@ i {
   to   { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
+.solButton {
+      position: relative;
+  height: 8vw;     /* 10vw */
+  width: 45vw;      /* 50vw */
+  border-radius: 50vw;
+  background: linear-gradient(135deg, #9945FF, #14F195, #00F9FF);
+  transition: all 0.4s ease;
+  cursor: pointer;
+  color: #fff;
+  font-size: 4vw; 
+ box-shadow: 0 0 0.5vw rgba(171, 196, 255, 0.3);  
+  border: none;
 
+}
 
+.xrpButton {
+     position: relative;
+  height: 8vw;     /* 10vw */
+  width: 45vw;      /* 50vw */
+  border-radius: 50vw;
+  background: linear-gradient(135deg, #23292F, #25AEE0);
+  transition: all 0.4s ease;
+  cursor: pointer;
+   color: white;
+  font-size: 4vw; 
+ box-shadow: 0 0 0.5vw rgba(171, 196, 255, 0.3);  
+  border: none;
+
+}
+
+.solButton:hover {
+  background: linear-gradient(135deg, #7928CA, #0AE3B1, #00E0FF);
+  box-shadow: 0 0 1vw #0AE3B1;
+  transform: scale(1.05);
+}
+
+.xrpButton:hover {
+background: linear-gradient(135deg, #1a1f23, #1E90FF);
+  box-shadow: 0 0 1vw #1E90FF;
+  transform: scale(1.05);
+}
 

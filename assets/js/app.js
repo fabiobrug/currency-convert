@@ -1,5 +1,52 @@
+const coins = [
+  {
+    name: "BTC",
+    icon: "<i class='fab fa-bitcoin'></i>",
+    iconClass: "fab fa-bitcoin",
+    class: "startButton",
+    price: "107859",
+    id: "btc",
+    qnt: "0",
+  },
+  {
+    name: "ETH",
+    icon: "<i class='fab fa-ethereum'></i>",
+    iconClass: "fab fa-ethereum",
+    class: "ethButton",
+    price: "2515",
+    id: "eth",
+    qnt: "0",
+  },
+  {
+    name: "SOL",
+    icon: "<i class='fas fa-sun'></i>", // usar ícone similar
+    iconClass: "fas fa-sun",
+    class: "solButton",
+    price: "145",
+    id: "sol",
+    qnt: "0",
+  },
+  {
+    name: "XRP",
+    icon: "<i class='fas fa-water'></i>", // usar ícone criativo
+    iconClass: "fas fa-water",
+    class: "xrpButton",
+    price: "2",
+    id: "xrp",
+    qnt: "0",
+  }
+];
+
+
+let coinIndex = 0;
+let currentCoin = coins[coinIndex]; 
+
+
 const button = document.querySelector(".startButton");
 const coin = document.querySelector(".coin");
+
+
+
 const balance = document.getElementById("totalCash")
 const btc = document.getElementById("btc")
 const shuffle = document.querySelector(".shuffle")
@@ -26,14 +73,23 @@ let btcTotal = 0;
 let btcQnt = 0;
 
 function addCash(){
-    btcTotal = btcTotal + 107859;
+    
+const price = parseFloat(currentCoin.price);
+
+    btcTotal = btcTotal + price;
     btcQnt++;
     const formatted = btcTotal.toLocaleString("pt-BR", {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
     })
     balance.innerHTML = `Balance: $${formatted}`
-    btc.innerHTML = `BTC: ${btcQnt}`
+
+    const coinDisplay = document.getElementById(currentCoin.id);
+
+    if(coinDisplay){
+        currentCoin.qnt++;
+        coinDisplay.innerHTML = `${currentCoin.name}: ${currentCoin.qnt}`;
+    }
 }
 
 const hellSound = new Audio("assets/sounds/heavy-dark-sound-7545.mp3");
@@ -51,6 +107,7 @@ function stopHellAudio() {
 
 function gmON(){
      document.body.classList.add("gamblingMode")
+     button.classList.remove(currentCoin.class);
      button.classList.add("startButtonGM")
      button.innerHTML = "Welcome to hell"
      shuffle.classList.add("shuffleGM")
@@ -61,13 +118,11 @@ function gmON(){
 }
 
 function gmOFF(){
+    coinUp()
     document.body.classList.remove("gamblingMode")
      button.classList.remove("startButtonGM")
      shuffle.classList.remove("shuffleGM")
-     coin.classList.remove('animate');
-     void coin.offsetWidth;
-     coin.classList.add('animate');
-     button.innerHTML = "BTC <i class='fab fa-bitcoin'></i>"
+     button.innerHTML = `${currentCoin.name} ${currentCoin.icon}`
      playCoinAudio();
      stopHellAudio();
 }
@@ -75,7 +130,7 @@ function gmOFF(){
 function gamblingMode() {
     const luck = Math.random();
 
-    if(luck < 0.5 && btcQnt != 0){
+    if(luck < 0.1 && btcQnt != 0){
         gambling = true;
         gmON()
     }else {
@@ -110,7 +165,13 @@ function addYes(){
         maximumFractionDigits: 2
     })
     balance.innerHTML = `Balance: $${formatted}`
-    btc.innerHTML = `BTC: ${btcQnt}`
+
+    const coinDisplay = document.getElementById(currentCoin.id);
+
+    if(coinDisplay){
+        coinDisplay.innerHTML = `${currentCoin.name}: ${currentCoin.qnt}`;
+    }
+
 
     buyAudio.play()
     gmOFF()
@@ -156,11 +217,36 @@ function removeGamblingUI() {
     removeYes();
     removeNo();
     removeQuestion();
+    button.classList.add(currentCoin.class);
     gambling = false;
 }
 
+
+
 shuffle.addEventListener('click', () => {
-    shuffleOrder = 1;
-    button.innerHTML = "ETH"
-   button.classList.add("ethButton")
+    coinIndex = (coinIndex + 1) % coins.length;
+
+    currentCoin = coins[coinIndex]
+
+    button.className = ""
+    button.innerHTML = `${currentCoin.name} ${currentCoin.icon}`
+    button.classList.add(currentCoin.class);
+    console.log(currentCoin)
 })
+
+function coinUp(){
+
+    const coinUp = document.getElementById("coinUp")
+
+ coinUp.innerHTML = '';
+
+const newCoin = document.createElement('i')
+    newCoin.className = currentCoin.iconClass
+
+    coinUp.appendChild(newCoin);
+
+    coin.classList.remove('animate');
+     void coin.offsetWidth;
+     coin.classList.add('animate');
+
+}
